@@ -1,6 +1,7 @@
 package com.walkerviani.workshopmongo.services;
 
 import com.walkerviani.workshopmongo.domain.User;
+import com.walkerviani.workshopmongo.dto.UserDTO;
 import com.walkerviani.workshopmongo.repository.UserRepository;
 import com.walkerviani.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,13 @@ public class UserService {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+    }
+
 }
